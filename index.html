@@ -1,23 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1383894953855252');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1383894953855252&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 <meta charset="utf-8">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Total Consignados">
@@ -66,19 +49,25 @@ footer{background:linear-gradient(115deg,#fff 10%,#f4ebd8 100%)}
 .legal-card h2{font-size:26px;margin:0 0 14px}.legal-card h3{font-size:16px;margin:18px 0 6px}.legal-card p,.legal-card li{font-size:14px;line-height:1.65;color:var(--muted)}
 .legal-card ul{padding-left:18px}.legal-meta{font-size:13px;color:#777;margin-top:14px}.legal-links{margin-top:8px;display:flex;gap:16px;flex-wrap:wrap}
 @media(max-width:760px){.legal-grid{grid-template-columns:1fr}.legal-card{padding:20px}}
+.zac-avatar img{width:100%;height:100%;object-fit:cover;object-position:38% 35%;transform:scale(1.7)}
 </style>
 
+
+<style id="zac-chat-style">
+.zac-launch{position:fixed;right:22px;bottom:22px;z-index:9998;border:0;border-radius:999px;background:linear-gradient(135deg,#cda54c,#f0d98d);color:#30240e;font-weight:800;padding:14px 18px;box-shadow:0 12px 34px #0003;cursor:pointer;display:flex;gap:9px;align-items:center}.zac-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px #22c55e22}.zac-box{position:fixed;right:22px;bottom:82px;width:min(390px,calc(100vw - 24px));height:min(620px,calc(100vh - 110px));z-index:9999;background:#fff;border:1px solid #eadfca;border-radius:22px;box-shadow:0 24px 70px #0003;overflow:hidden;display:none;flex-direction:column}.zac-box.open{display:flex}.zac-head{background:linear-gradient(135deg,#3a3328,#17140f);color:#fff;padding:16px 17px;display:flex;align-items:center;gap:12px}.zac-avatar{overflow:hidden;width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#e9cf83,#a77b24);color:#20190d;font-weight:900;font-size:18px}.zac-title{font-weight:800}.zac-status{font-size:12px;opacity:.82}.zac-close{margin-left:auto;border:0;background:#ffffff16;color:#fff;width:34px;height:34px;border-radius:10px;font-size:20px;cursor:pointer}.zac-messages{flex:1;overflow:auto;padding:16px;background:#faf8f3}.zac-msg{max-width:86%;padding:11px 13px;border-radius:15px;margin:0 0 9px;font-size:14px;line-height:1.42;white-space:pre-line}.zac-msg.bot{background:#fff;border:1px solid #ece4d6;border-top-left-radius:5px}.zac-msg.user{background:#ead7a4;margin-left:auto;border-top-right-radius:5px;color:#30240e}.zac-options{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 13px}.zac-option{border:1px solid #cda54c;background:#fff;color:#725514;border-radius:999px;padding:9px 11px;font-weight:700;cursor:pointer;font-size:13px}.zac-option:hover{background:#fff8e8}.zac-inputbar{display:flex;gap:8px;padding:12px;border-top:1px solid #eee5d7;background:#fff}.zac-inputbar input{flex:1;border:1px solid #d8d1c5;border-radius:12px;padding:11px 12px;outline:none}.zac-send{border:0;border-radius:12px;padding:0 14px;background:#cda54c;font-weight:800;cursor:pointer}.zac-note{font-size:11px;color:#766f64;padding:0 14px 11px;background:#fff}.zac-summary{background:#fffaf0;border:1px solid #ead39b;border-radius:12px;padding:11px;margin-top:6px;font-size:13px}.zac-human{font-size:12px;text-align:center;color:#766f64;margin:10px 0}.zac-hidden{display:none!important}@media(max-width:600px){.zac-box{right:12px;bottom:72px;height:calc(100vh - 90px)}.zac-launch{right:12px;bottom:12px}}
+.zac-avatar img{width:100%;height:100%;object-fit:cover;object-position:38% 35%;transform:scale(1.7)}
+</style>
 </head>
 <body id="inicio">
 <div class="demo">Atendimento pelo WhatsApp • Fale com nossa equipe</div>
 <header class="wrap header"><a href="#inicio" class="logo" aria-label="Total Consignados — início"></a><nav aria-label="Menu principal"><a href="#inicio">Início</a><a href="#sobre">Quem somos</a><a href="#produtos">Produtos</a><a href="#duvidas">Dúvidas</a><a href="#atendimento">Contato</a></nav><a class="btn" href="#atendimento">Fale no WhatsApp</a></header>
 <main>
-<section class="hero"><div class="hero-inner"><div class="hero-copy"><div class="eyebrow">CRÉDITO CONSIGNADO</div><h1>Mais crédito<br>para o seu<br><span>amanhã.</span></h1><p class="intro">Opções de crédito para aposentados, pensionistas do INSS, servidores públicos e trabalhadores com carteira assinada.</p><a class="btn" href="#atendimento">Simule agora pelo WhatsApp <span aria-hidden="true">→</span></a><div class="trust"><span><b aria-hidden="true">✓</b>Atendimento<br>humano</span><span><b aria-hidden="true">✓</b>Orientação<br>em cada etapa</span><span><b aria-hidden="true">✓</b>Clareza<br>para decidir</span></div><p class="fine">Crédito sujeito à análise e às condições da instituição financeira.</p></div><div class="hero-art" role="img" aria-label="Celular com a marca Total Consignados ao lado do símbolo T dourado em 3D"></div></div></section>
+<section class="hero"><div class="hero-inner"><div class="hero-copy"><div class="eyebrow">CRÉDITO CONSIGNADO</div><h1>Mais crédito<br>para o seu<br><span>amanhã.</span></h1><p class="intro">Opções de crédito para aposentados, pensionistas do INSS, servidores públicos e trabalhadores com carteira assinada.</p><a class="btn" href="#atendimento">Simule agora <span aria-hidden="true">→</span></a><div class="trust"><span><b aria-hidden="true">✓</b>Atendimento<br>humano</span><span><b aria-hidden="true">✓</b>Orientação<br>em cada etapa</span><span><b aria-hidden="true">✓</b>Clareza<br>para decidir</span></div><p class="fine">Crédito sujeito à análise e às condições da instituição financeira.</p></div><div class="hero-art" role="img" aria-label="Celular com a marca Total Consignados ao lado do símbolo T dourado em 3D"></div></div></section>
 <section class="section wrap center"><h2>Como funciona?</h2><p class="subtitle">Conheça as etapas do atendimento.</p><div class="steps"><div class="step"><span class="step-number">1</span><div><h3>Conte o que<br>você precisa</h3><p>Escolha a opção de crédito do seu interesse.</p></div></div><div class="step"><span class="step-number">2</span><div><h3>Conheça<br>as condições</h3><p>Confira taxas, parcelas, prazo e custo total.</p></div></div><div class="step"><span class="step-number">3</span><div><h3>Decida com<br>tranquilidade</h3><p>Contratação sujeita à análise e à sua aprovação das condições.</p></div></div></div></section>
 <section id="produtos" class="products section"><div class="wrap center"><h2>Nossas principais soluções</h2><div class="underline"></div><div class="cards"><article class="card"><span class="product-icon inss" aria-hidden="true"></span><h3>INSS</h3><p>Aposentados e pensionistas</p><a class="interest" href="#atendimento" data-produto="Consignado INSS">Tenho interesse →</a></article><article class="card"><span class="product-icon server" aria-hidden="true"></span><h3>Servidores Públicos</h3><p>Federais, estaduais e municipais</p><a class="interest" href="#atendimento" data-produto="Consignado para servidor público">Tenho interesse →</a></article><article class="card"><span class="product-icon clt" aria-hidden="true"></span><h3>CLT</h3><p>Trabalhadores com carteira assinada</p><a class="interest" href="#atendimento" data-produto="Consignado CLT">Tenho interesse →</a></article><article class="card"><span class="product-icon port" aria-hidden="true"></span><h3>Portabilidade</h3><p>Compare condições para o seu contrato</p><a class="interest" href="#atendimento" data-produto="Portabilidade">Tenho interesse →</a></article></div></div></section>
 <section id="sobre" class="about"><div class="couple" role="img" aria-label="Casal sorrindo em uma composição com detalhes dourados"></div><div class="about-copy"><h2>Seu bem-estar<br>é a nossa prioridade.</h2><div class="underline" style="margin:18px 0"></div><p>Total Consignados.<br>Mais tranquilidade hoje, mais planos amanhã.</p></div></section>
 <section id="atendimento" class="wrap section contact"><div><div class="eyebrow">VAMOS CONVERSAR?</div><h2>Seu crédito,<br>nossa prioridade.</h2><p>Escolha uma opção para conhecer o atendimento.</p><p>Escolha com quem deseja falar pelo WhatsApp.</p><p class="fine">Izaque: <strong>(11) 96681-3544</strong> &nbsp; • &nbsp; Fabiane: <strong>(11) 96604-8067</strong></p></div><div class="panel"><h2 style="font-size:24px">Qual crédito você procura?</h2><div class="lead-fields"><div class="lead-field full"><label for="nome">Seu nome</label><input id="nome" type="text" autocomplete="name" placeholder="Digite seu nome" maxlength="80"></div><div class="lead-field full"><label for="telefone">Seu WhatsApp</label><input id="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999" maxlength="15"></div></div><label for="produto">Tipo de crédito</label><select id="produto"><option value="">Selecione uma opção</option><option>Consignado INSS</option><option>Consignado para servidor público</option><option>Consignado CLT</option><option>Portabilidade</option><option>Refinanciamento</option></select><p class="lead-help">Esses dados são usados apenas para montar a mensagem que será aberta no WhatsApp.</p><label class="consent-box"><input id="consentimento" type="checkbox"><span>Li e concordo com a <a href="#privacidade">Política de Privacidade</a> e autorizo o contato da Total Consignados para atendimento desta solicitação.</span></label><p id="orientacao" class="notice" aria-live="polite">Preencha seu nome, WhatsApp, selecione o tipo de crédito e escolha um atendente.</p><div class="whatsapp-actions"><button class="btn whatsapp-btn" type="button" data-atendente="Izaque" data-numero="5511966813544">Falar com Izaque</button><button class="btn whatsapp-btn" type="button" data-atendente="Fabiane" data-numero="5511966048067">Falar com Fabiane</button><button class="btn whatsapp-btn" type="button" data-atendente="Augusto" data-numero="5511951696289">Falar com Augusto</button></div></div></section>
-<section id="duvidas" class="wrap section"><h2>Dúvidas frequentes</h2><details><summary>Esta página já realiza uma simulação?</summary><p>Ainda não. Esta é uma demonstração do site. Não há cálculo de parcelas, consulta bancária ou envio de solicitação.</p></details><details><summary>A aprovação do crédito é garantida?</summary><p>Não. A disponibilidade e a contratação dependem da análise e das condições da instituição financeira.</p></details><details><summary>Como falar com a Total Consignados?</summary><p>Escolha o tipo de crédito e fale pelo WhatsApp com Izaque, Fabiane ou Augusto.</p></details></section>
+<section id="duvidas" class="wrap section"><h2>Dúvidas frequentes</h2><details><summary>Como funciona a pré-análise?</summary><p>O Guto coleta informações iniciais para direcionar o atendimento. Valores e condições somente são confirmados após análise da instituição financeira.</p></details><details><summary>A aprovação do crédito é garantida?</summary><p>Não. A disponibilidade e a contratação dependem da análise e das condições da instituição financeira.</p></details><details><summary>Como falar com a Total Consignados?</summary><p>Escolha o tipo de crédito e fale pelo WhatsApp com Izaque, Fabiane ou Augusto.</p></details></section>
 
 <section id="privacidade" class="wrap legal-area">
   <div class="legal-grid">
@@ -117,4 +106,79 @@ function atualizarOrientacao(){orientacao.textContent=produto.value?'Opção sel
 telefone.addEventListener('input',function(){let v=this.value.replace(/\D/g,'').slice(0,11);if(v.length>10)this.value='('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);else if(v.length>6)this.value='('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);else if(v.length>2)this.value='('+v.slice(0,2)+') '+v.slice(2);else if(v.length)this.value='('+v;});
 produto.addEventListener('change',atualizarOrientacao);document.querySelectorAll('[data-produto]').forEach(function(link){link.addEventListener('click',function(){produto.value=link.dataset.produto;atualizarOrientacao();});});
 document.querySelectorAll('.whatsapp-btn').forEach(function(btn){btn.addEventListener('click',function(){const n=nome.value.trim();const t=telefone.value.trim();if(!n){orientacao.textContent='Digite seu nome para continuar.';nome.focus();return;}if(t.replace(/\D/g,'').length<10){orientacao.textContent='Digite um WhatsApp válido para continuar.';telefone.focus();return;}if(!produto.value){orientacao.textContent='Selecione primeiro o tipo de crédito que você procura.';produto.focus();return;}if(!consentimento.checked){orientacao.textContent='Para continuar, marque a opção de concordância com a Política de Privacidade.';consentimento.focus();return;}const msg='Olá, '+btn.dataset.atendente+'! Vim pelo site da Total Consignados. Meu nome é '+n+', meu WhatsApp é '+t+' e tenho interesse em '+produto.value+'. Gostaria de fazer uma simulação.';window.open('https://wa.me/'+btn.dataset.numero+'?text='+encodeURIComponent(msg),'_blank','noopener');});});
-</script></body></html>
+</script>
+<button id="zacLaunch" class="zac-launch" type="button" aria-label="Abrir atendimento com Guto"><span class="zac-dot"></span>💬 Fale com o Guto</button>
+<section id="zacBox" class="zac-box" aria-label="Guto, assistente da Total Consignados">
+  <div class="zac-head"><div class="zac-avatar"><img src="guto.png" alt="Guto"></div><div><div class="zac-title">Guto | Assistente da Total</div><div class="zac-status">● Atendimento online</div></div><button id="zacClose" class="zac-close" type="button" aria-label="Fechar">×</button></div>
+  <div id="zacMessages" class="zac-messages"></div>
+  <div id="zacInputBar" class="zac-inputbar zac-hidden"><input id="zacInput" type="text" autocomplete="off" placeholder="Digite aqui..."><button id="zacSend" class="zac-send" type="button">Enviar</button></div>
+  <div class="zac-note">Pré-atendimento. Crédito sujeito à análise e aprovação da instituição financeira.</div>
+</section>
+
+<script id="zac-chat-script">
+(function(){
+ const launch=document.getElementById('zacLaunch'), box=document.getElementById('zacBox'), close=document.getElementById('zacClose'), msgs=document.getElementById('zacMessages'), bar=document.getElementById('zacInputBar'), input=document.getElementById('zacInput'), send=document.getElementById('zacSend');
+ const products=['INSS Novo','Refinanciamento','Portabilidade','Empréstimo CLT','FGTS','Falar com atendente'];
+ let step='start';
+ const lead={};
+ function resetLead(){Object.keys(lead).forEach(k=>delete lead[k]);}
+ function scroll(){msgs.scrollTop=msgs.scrollHeight}
+ function bot(t){const d=document.createElement('div');d.className='zac-msg bot';d.textContent=t;msgs.appendChild(d);scroll()}
+ function user(t){const d=document.createElement('div');d.className='zac-msg user';d.textContent=t;msgs.appendChild(d);scroll()}
+ function options(arr,cb){bar.classList.add('zac-hidden');const w=document.createElement('div');w.className='zac-options';arr.forEach(x=>{const b=document.createElement('button');b.type='button';b.className='zac-option';b.textContent=x;b.onclick=()=>{w.remove();user(x);cb(x)};w.appendChild(b)});msgs.appendChild(w);scroll()}
+ function askText(question,next,placeholder){bot(question);step=next;bar.classList.remove('zac-hidden');input.placeholder=placeholder||'Digite aqui...';input.value='';input.focus()}
+ function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+ function brl(raw){const digits=String(raw).replace(/\D/g,'');if(!digits)return '';return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(digits)/100)}
+ function start(){resetLead();step='start';msgs.innerHTML='';bar.classList.add('zac-hidden');bot('Olá! 👋 Eu sou o Guto, assistente da Total Consignados. Vou te ajudar com seu pré-atendimento.');bot('As informações e simulações são estimativas e estão sujeitas à análise e aprovação da instituição financeira.');bot('Qual opção você procura?');options(products,chooseProduct)}
+ function chooseProduct(x){lead.produto=x;if(x==='Falar com atendente'){askText('Claro. Qual é o seu nome?','name','Seu nome');return}bot('Perfeito. Vou fazer algumas perguntas rápidas para direcionar seu atendimento de '+x+'.');askText('Primeiro, qual é o seu nome?','name','Seu nome')}
+ function afterName(){askText('Obrigado, '+lead.nome+'. Qual é o seu WhatsApp com DDD?','phone','(11) 99999-9999')}
+ function afterPhone(){bar.classList.add('zac-hidden');
+   if(lead.produto==='INSS Novo') return inssStart();
+   if(lead.produto==='Refinanciamento') return refinStart();
+   if(lead.produto==='Portabilidade') return portStart();
+   if(lead.produto==='Empréstimo CLT') return cltStart();
+   if(lead.produto==='FGTS') return fgtsStart();
+   finish();
+ }
+ function inssStart(){bot('Você recebe aposentadoria ou pensão do INSS?');options(['Aposentadoria','Pensão','Outro benefício'],x=>{lead.tipoBeneficio=x;bot('Você sabe o número do benefício?');options(['Informar benefício','Não sei o número'],y=>{if(y==='Não sei o número'){lead.beneficio='Não informado';askText('Qual é o valor aproximado do seu benefício?','inssValor','Ex.: R$ 1.500,00')}else askText('Digite o número do benefício.','inssBeneficio','Número do benefício')})})}
+ function afterInssValor(){bar.classList.add('zac-hidden');bot('Você já possui empréstimos consignados nesse benefício?');options(['Sim','Não','Não sei'],x=>{lead.temEmprestimos=x;bot('Você sabe se possui margem disponível?');options(['Sim','Não','Não sei'],y=>{lead.margem=y;finish()})})}
+ function refinStart(){askText('Qual é o banco atual do contrato que você quer refinanciar?','refinBanco','Nome do banco')}
+ function afterRefinBanco(){askText('Qual é o valor aproximado da parcela desse contrato?','refinParcela','Ex.: R$ 450,00')}
+ function afterRefinParcela(){bar.classList.add('zac-hidden');bot('Quantos contratos você possui nesse banco?');options(['1 contrato','2 contratos','3 ou mais','Não sei'],x=>{lead.qtdContratos=x;bot('Você sabe aproximadamente quantas parcelas faltam?');options(['Informar parcelas','Não sei'],y=>{if(y==='Não sei'){lead.parcelasRestantes='Não informado';finish()}else askText('Digite aproximadamente quantas parcelas faltam.','refinRestantes','Ex.: 36')})})}
+ function portStart(){askText('Qual é o banco atual do contrato que você quer portar?','portBanco','Nome do banco')}
+ function afterPortBanco(){askText('Qual é o valor aproximado da parcela desse contrato?','portParcela','Ex.: R$ 520,00')}
+ function afterPortParcela(){bar.classList.add('zac-hidden');bot('Quantos contratos você quer portar?');options(['1 contrato','2 contratos','3 ou mais','Não sei'],x=>{lead.qtdContratos=x;bot('Você sabe aproximadamente quantas parcelas faltam?');options(['Informar parcelas','Não sei'],y=>{if(y==='Não sei'){lead.parcelasRestantes='Não informado';portObjetivo()}else askText('Digite aproximadamente quantas parcelas faltam.','portRestantes','Ex.: 40')})})}
+ function portObjetivo(){bar.classList.add('zac-hidden');bot('O que você busca com a portabilidade?');options(['Reduzir a parcela','Receber troco','Quero conhecer as opções'],x=>{lead.objetivo=x;finish()})}
+ function cltStart(){bot('Você está trabalhando com carteira assinada atualmente?');options(['Sim','Não'],x=>{lead.registrado=x;if(x==='Não')return finish();askText('Há quanto tempo você está no emprego atual?','cltTempo','Ex.: 1 ano e 6 meses')})}
+ function afterCltTempo(){bar.classList.add('zac-hidden');bot('A empresa onde você trabalha é pública ou privada?');options(['Privada','Pública','Não sei'],x=>{lead.tipoEmpresa=x;bot('Você já possui Crédito do Trabalhador / consignado CLT?');options(['Sim','Não','Não sei'],y=>{lead.temClt=y;finish()})})}
+ function fgtsStart(){bot('Você consegue acessar o aplicativo FGTS?');options(['Sim','Não'],x=>{lead.acessoFgts=x;finish()})}
+ function resumoValor(v){return v==='Não sei'?'Não informado':v;}
+ function summaryRows(){let r=[['Nome',lead.nome],['WhatsApp',lead.telefone],['Interesse',lead.produto]];
+   if(lead.tipoBeneficio)r.push(['Benefício',lead.tipoBeneficio]); if(lead.beneficio)r.push(['Nº do benefício',lead.beneficio]); if(lead.valorBeneficio)r.push(['Valor aproximado do benefício',lead.valorBeneficio]); if(lead.temEmprestimos)r.push(['Já possui consignados',lead.temEmprestimos]); if(lead.margem)r.push(['Sabe se possui margem',lead.margem]);
+   if(lead.banco)r.push(['Banco atual',lead.banco]); if(lead.valorParcela)r.push(['Parcela aproximada',lead.valorParcela]); if(lead.qtdContratos)r.push(['Quantidade de contratos',lead.qtdContratos]); if(lead.parcelasRestantes)r.push(['Parcelas restantes',lead.parcelasRestantes]); if(lead.objetivo)r.push(['Objetivo',lead.objetivo]);
+   if(lead.registrado)r.push(['Carteira assinada atualmente',lead.registrado]); if(lead.tempoEmprego)r.push(['Tempo no emprego atual',lead.tempoEmprego]); if(lead.tipoEmpresa)r.push(['Empresa',lead.tipoEmpresa]); if(lead.temClt)r.push(['Já possui consignado CLT',lead.temClt]); if(lead.acessoFgts)r.push(['Acesso ao app FGTS',lead.acessoFgts]); return r.map(([k,v])=>[k,resumoValor(v)]); }
+ function finish(){bar.classList.add('zac-hidden');bot('Pré-atendimento concluído ✅');const d=document.createElement('div');d.className='zac-summary';d.innerHTML='<strong>Resumo</strong><br>'+summaryRows().map(([k,v])=>esc(k)+': '+esc(v)).join('<br>')+'<br><br><strong>Esta pré-análise não garante aprovação ou liberação de crédito.</strong>';msgs.appendChild(d);const h=document.createElement('div');h.className='zac-human';h.textContent='Pronto, '+lead.nome+'! Recebi suas informações. Um especialista da Total Consignados continuará seu atendimento.';msgs.appendChild(h);options(['Fazer outro atendimento'],start);scroll()}
+ function submit(){let v=input.value.trim();if(!v)return;input.value='';
+   if(step==='phone' && v.replace(/\D/g,'').length<10){bot('Digite um número com DDD para eu conseguir direcionar seu atendimento.');return}
+   if(['inssValor','refinParcela','portParcela'].includes(step)){v=brl(v);if(!v){bot('Digite um valor válido para continuar.');return}}
+   user(v);
+   if(step==='name'){lead.nome=v;afterName()}
+   else if(step==='phone'){lead.telefone=v;afterPhone()}
+   else if(step==='inssBeneficio'){lead.beneficio=v;askText('Qual é o valor aproximado do seu benefício?','inssValor','Ex.: R$ 1.500,00')}
+   else if(step==='inssValor'){lead.valorBeneficio=v;afterInssValor()}
+   else if(step==='refinBanco'){lead.banco=v;afterRefinBanco()}
+   else if(step==='refinParcela'){lead.valorParcela=v;afterRefinParcela()}
+   else if(step==='refinRestantes'){lead.parcelasRestantes=v;finish()}
+   else if(step==='portBanco'){lead.banco=v;afterPortBanco()}
+   else if(step==='portParcela'){lead.valorParcela=v;afterPortParcela()}
+   else if(step==='portRestantes'){lead.parcelasRestantes=v;portObjetivo()}
+   else if(step==='cltTempo'){lead.tempoEmprego=/^\d+$/.test(v)?(v==='1'?'1 mês':v+' meses'):v;afterCltTempo()}
+   else if(step==='detail'){lead.detalhe=v;finish()}
+ }
+ launch.onclick=()=>{box.classList.add('open');launch.classList.add('zac-hidden');if(!msgs.children.length)start()};
+ close.onclick=()=>{box.classList.remove('open');launch.classList.remove('zac-hidden')}; send.onclick=submit;
+ input.addEventListener('input',function(){if(step==='phone'){let v=this.value.replace(/\D/g,'').slice(0,11);if(v.length>10)this.value='('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);else if(v.length>6)this.value='('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);else if(v.length>2)this.value='('+v.slice(0,2)+') '+v.slice(2);else if(v.length)this.value='('+v;return}if(['inssValor','refinParcela','portParcela'].includes(step)){this.value=brl(this.value)}});
+ input.addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
+})();
+</script>
+</body></html>
