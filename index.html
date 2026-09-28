@@ -114,7 +114,7 @@ footer{background:linear-gradient(115deg,#fff 10%,#f4ebd8 100%)}
 <script>
 const TOTAL_API='https://upturned-wobbling-prolonged.ngrok-free.dev';
 async function enviarLeadTotal(dados){
-  const r=await fetch(TOTAL_API+'/api/site/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(dados)});
+  const r=await fetch(TOTAL_API+'/api/site/leads',{method:'POST',headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},body:JSON.stringify(dados)});
   if(!r.ok) throw new Error('Falha ao enviar atendimento');
   const j=await r.json();
   if(!j.ok) throw new Error(j.erro||'Falha ao enviar atendimento');
@@ -199,7 +199,7 @@ if(gutoBubble){
  const liveSeen=new Set(); let liveTimer=null;
  async function pollLive(){
    if(!lead._chatId||!lead._chatToken)return;
-   try{const r=await fetch(TOTAL_API+'/api/site/chat/'+lead._chatId+'?token='+encodeURIComponent(lead._chatToken));const j=await r.json();if(!j.ok)return;
+   try{const r=await fetch(TOTAL_API+'/api/site/chat/'+lead._chatId+'?token='+encodeURIComponent(lead._chatToken),{headers:{'ngrok-skip-browser-warning':'true'}});const j=await r.json();if(!j.ok)return;
      (j.mensagens||[]).forEach(m=>{if(liveSeen.has(m.id))return;liveSeen.add(m.id);if(m.tipo==='atendente'){bot(m.autor+': '+m.mensagem)}else if(m.tipo==='sistema'){bot(m.mensagem)}});
      if(j.status==='Finalizado'){step='finalizado';bar.classList.add('zac-hidden');if(liveTimer){clearInterval(liveTimer);liveTimer=null}bot('Atendimento finalizado.');if(j.avaliacao_estrelas){bot('Obrigado pela sua avaliação! 💛');options(['Iniciar novo atendimento'],start)}else{mostrarAvaliacao()}}
    }catch(e){}
@@ -208,7 +208,7 @@ if(gutoBubble){
    const status=box.querySelector('.zac-rating-status');
    box.querySelectorAll('.zac-star').forEach((b,i)=>{b.disabled=true;if(i<estrelas)b.classList.add('active')});
    status.textContent='Enviando sua avaliação...';
-   try{const r=await fetch(TOTAL_API+'/api/site/chat/'+lead._chatId+'/avaliar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:lead._chatToken,estrelas:estrelas})});const j=await r.json();if(!j.ok)throw new Error(j.erro||'Erro');box.remove();bot('Obrigado pela sua avaliação! 💛');options(['Iniciar novo atendimento'],start)}catch(e){box.querySelectorAll('.zac-star').forEach(b=>b.disabled=false);status.textContent='Não consegui registrar agora. Toque em uma estrela para tentar novamente.';}
+   try{const r=await fetch(TOTAL_API+'/api/site/chat/'+lead._chatId+'/avaliar',{method:'POST',headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},body:JSON.stringify({token:lead._chatToken,estrelas:estrelas})});const j=await r.json();if(!j.ok)throw new Error(j.erro||'Erro');box.remove();bot('Obrigado pela sua avaliação! 💛');options(['Iniciar novo atendimento'],start)}catch(e){box.querySelectorAll('.zac-star').forEach(b=>b.disabled=false);status.textContent='Não consegui registrar agora. Toque em uma estrela para tentar novamente.';}
  }
  function mostrarAvaliacao(){
    const d=document.createElement('div');d.className='zac-rating';d.innerHTML='<div class="zac-rating-title">Como foi seu atendimento?</div><div class="zac-rating-sub">Avalie sua experiência com a Total Consignados.</div><div class="zac-stars" aria-label="Avaliação de 1 a 5 estrelas"></div><div class="zac-rating-status" aria-live="polite"></div>';
@@ -216,7 +216,7 @@ if(gutoBubble){
  }
  function iniciarChatHumano(){step='live';bar.classList.remove('zac-hidden');input.placeholder='Digite sua mensagem para Izaque...';bot('Você pode continuar por aqui. Quando Izaque assumir, as mensagens dele aparecerão neste chat.');pollLive();if(liveTimer)clearInterval(liveTimer);liveTimer=setInterval(pollLive,2000);input.focus()}
  async function enviarLive(v){
-   try{const r=await fetch(TOTAL_API+'/api/site/chat/'+lead._chatId,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:lead._chatToken,mensagem:v})});const j=await r.json();if(!j.ok)bot('Não consegui enviar essa mensagem agora. Tente novamente.')}catch(e){bot('Conexão temporariamente indisponível. Tente novamente.')}
+   try{const r=await fetch(TOTAL_API+'/api/site/chat/'+lead._chatId,{method:'POST',headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},body:JSON.stringify({token:lead._chatToken,mensagem:v})});const j=await r.json();if(!j.ok)bot('Não consegui enviar essa mensagem agora. Tente novamente.')}catch(e){bot('Conexão temporariamente indisponível. Tente novamente.')}
  }
  function finish(){bar.classList.add('zac-hidden');bot('Pré-atendimento concluído ✅');const d=document.createElement('div');d.className='zac-summary';d.innerHTML='<strong>Resumo</strong><br>'+summaryRows().map(([k,v])=>esc(k)+': '+esc(v)).join('<br>')+'<br><br><strong>Esta pré-análise não garante aprovação ou liberação de crédito.</strong>';msgs.appendChild(d);const h=document.createElement('div');h.className='zac-human';h.textContent='Pronto, '+lead.nome+'! Estou encaminhando suas informações para a Total Consignados...';msgs.appendChild(h);scroll();enviarChatParaSistema().then(ok=>{h.textContent=ok?'Pronto, '+lead.nome+'! Suas informações foram encaminhadas para Izaque. Você pode continuar conversando por aqui.':'Não consegui encaminhar automaticamente agora. Tente novamente em instantes.';scroll();if(ok)iniciarChatHumano();else options(['Fazer outro atendimento'],start);});}
  function submit(){let v=input.value.trim();if(!v)return;input.value='';if(step==='live'){user(v);enviarLive(v);return;}
