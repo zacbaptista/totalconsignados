@@ -37,7 +37,7 @@ body{background:radial-gradient(ellipse at 95% 65%,#eddbb966,transparent 48%),li
 .panel{background:linear-gradient(135deg,#fffdf8,#f1e4c9)}
 .step-number{background:linear-gradient(140deg,#faf5e9,#e9ce99)}
 footer{background:linear-gradient(115deg,#fff 10%,#f4ebd8 100%)}
-.whatsapp-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.whatsapp-btn{background:#25D366!important;color:#fff!important;border-color:#25D366!important;cursor:pointer;text-align:center}.whatsapp-btn:hover{filter:brightness(.95);transform:translateY(-1px)}.lead-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 0}.lead-field{display:flex;flex-direction:column;gap:7px}.lead-field.full{grid-column:1/-1}.lead-field input{width:100%;box-sizing:border-box;border:1px solid #d9dde5;border-radius:12px;padding:13px 14px;font:inherit;color:var(--ink);background:#fff;outline:none}.lead-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(151,112,32,.12)}.lead-help{font-size:12px;color:var(--muted);margin:8px 0 0}@media(max-width:620px){.lead-fields{grid-template-columns:1fr}}@media(max-width:520px){.whatsapp-actions{grid-template-columns:1fr}}
+.whatsapp-actions{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:14px}.whatsapp-actions .whatsapp-btn{width:min(100%,360px)}.whatsapp-btn{background:#25D366!important;color:#fff!important;border-color:#25D366!important;cursor:pointer;text-align:center}.whatsapp-btn:hover{filter:brightness(.95);transform:translateY(-1px)}.lead-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 0}.lead-field{display:flex;flex-direction:column;gap:7px}.lead-field.full{grid-column:1/-1}.lead-field input{width:100%;box-sizing:border-box;border:1px solid #d9dde5;border-radius:12px;padding:13px 14px;font:inherit;color:var(--ink);background:#fff;outline:none}.lead-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(151,112,32,.12)}.lead-help{font-size:12px;color:var(--muted);margin:8px 0 0}@media(max-width:620px){.lead-fields{grid-template-columns:1fr}}@media(max-width:520px){.whatsapp-actions{grid-template-columns:1fr}}
 
 /* LGPD e dados empresariais */
 .consent-box{display:flex;gap:10px;align-items:flex-start;margin:14px 0 4px;padding:12px 14px;border:1px solid #e4e0d8;border-radius:14px;background:#fffdf8;font-size:13px;line-height:1.45;color:var(--muted)}
@@ -50,90 +50,22 @@ footer{background:linear-gradient(115deg,#fff 10%,#f4ebd8 100%)}
 .legal-card ul{padding-left:18px}.legal-meta{font-size:13px;color:#777;margin-top:14px}.legal-links{margin-top:8px;display:flex;gap:16px;flex-wrap:wrap}
 @media(max-width:760px){.legal-grid{grid-template-columns:1fr}.legal-card{padding:20px}}
 .zac-avatar img{width:100%;height:100%;object-fit:cover;object-position:38% 35%;transform:scale(1.7)}
-
-/* Ajuste iPhone/Safari: teclado + largura segura */
-@media(max-width:600px){
-  html,body{max-width:100%;overflow-x:hidden}
-  .zac-box{
-    box-sizing:border-box;
-    max-width:calc(100vw - 20px);
-    max-width:calc(100dvw - 20px);
-    overflow:hidden;
-  }
-  .zac-head,.zac-messages,.zac-inputbar,.zac-note{box-sizing:border-box;width:100%;max-width:100%}
-  .zac-note{overflow-wrap:anywhere;word-break:normal}
-  .zac-inputbar input{width:100%;max-width:100%;box-sizing:border-box}
-  .zac-msg{box-sizing:border-box}
-}
-
 </style>
 
 
 <style id="zac-chat-style">
-.zac-launch{position:fixed;right:22px;bottom:22px;z-index:9998;border:0;border-radius:999px;background:linear-gradient(135deg,#cda54c,#f0d98d);color:#30240e;font-weight:800;padding:14px 18px;box-shadow:0 12px 34px #0003;cursor:pointer;display:flex;gap:9px;align-items:center}.zac-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px #22c55e22}.zac-box{position:fixed;right:22px;bottom:82px;width:min(390px,calc(100vw - 24px));height:min(620px,calc(100vh - 110px));z-index:9999;background:#fff;border:1px solid #eadfca;border-radius:22px;box-shadow:0 24px 70px #0003;overflow:hidden;display:none;flex-direction:column}.zac-box.open{display:flex}.zac-head{background:linear-gradient(135deg,#3a3328,#17140f);color:#fff;padding:16px 17px;display:flex;align-items:center;gap:12px}.zac-avatar{overflow:hidden;width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#e9cf83,#a77b24);color:#20190d;font-weight:900;font-size:18px}.zac-title{font-weight:800}.zac-status{font-size:12px;opacity:.82}.zac-close{margin-left:auto;border:0;background:#ffffff16;color:#fff;width:34px;height:34px;border-radius:10px;font-size:20px;cursor:pointer}.zac-messages{flex:1;overflow:auto;padding:16px;background:#faf8f3}.zac-msg{max-width:86%;padding:11px 13px;border-radius:15px;margin:0 0 9px;font-size:14px;line-height:1.42;white-space:pre-line}.zac-msg.bot{background:#fff;border:1px solid #ece4d6;border-top-left-radius:5px}.zac-msg.user{background:#ead7a4;margin-left:auto;border-top-right-radius:5px;color:#30240e}.zac-options{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 13px}.zac-option{border:1px solid #cda54c;background:#fff;color:#725514;border-radius:999px;padding:9px 11px;font-weight:700;cursor:pointer;font-size:13px}.zac-option:hover{background:#fff8e8}.zac-inputbar{display:flex;gap:8px;padding:12px;border-top:1px solid #eee5d7;background:#fff}.zac-inputbar input{flex:1;border:1px solid #d8d1c5;border-radius:12px;padding:11px 12px;outline:none}.zac-send{border:0;border-radius:12px;padding:0 14px;background:#cda54c;font-weight:800;cursor:pointer}.zac-note{font-size:11px;color:#766f64;padding:0 14px 11px;background:#fff}.zac-summary{background:#fffaf0;border:1px solid #ead39b;border-radius:12px;padding:11px;margin-top:6px;font-size:13px}.zac-human{font-size:12px;text-align:center;color:#766f64;margin:10px 0}.zac-hidden{display:none!important}@media(max-width:600px){
-  .zac-box{
-    left:10px;
-    right:10px;
-    bottom:10px;
-    width:auto;
-    height:calc(100dvh - 20px);
-    max-height:calc(100dvh - 20px);
-    border-radius:18px;
-  }
-  .zac-head{padding:12px 13px;gap:10px;flex:0 0 auto}
-  .zac-avatar{width:40px;height:40px;flex:0 0 40px}
-  .zac-title{font-size:15px;line-height:1.15}
-  .zac-status{font-size:11px}
-  .zac-close{width:32px;height:32px;flex:0 0 32px}
-  .zac-messages{
-    padding:12px;
-    min-height:0;
-    overscroll-behavior:contain;
-    -webkit-overflow-scrolling:touch;
-  }
-  .zac-msg{
-    max-width:92%;
-    font-size:14px;
-    line-height:1.4;
-    padding:10px 11px;
-    overflow-wrap:anywhere;
-  }
-  .zac-options{gap:7px;margin:5px 0 11px}
-  .zac-option{
-    font-size:13px;
-    line-height:1.2;
-    padding:9px 10px;
-    white-space:normal;
-  }
-  .zac-inputbar{
-    padding:9px 10px;
-    gap:7px;
-    flex:0 0 auto;
-  }
-  .zac-inputbar input{
-    min-width:0;
-    font-size:16px;
-    padding:11px 10px;
-  }
-  .zac-send{
-    flex:0 0 auto;
-    min-width:58px;
-    padding:0 11px;
-  }
-  .zac-note{
-    font-size:10px;
-    line-height:1.35;
-    padding:0 11px 9px;
-    flex:0 0 auto;
-  }
-  .zac-launch{right:12px;bottom:12px;max-width:calc(100vw - 24px)}
-}
-@supports not (height:100dvh){
-  @media(max-width:600px){
-    .zac-box{height:calc(100vh - 20px);max-height:calc(100vh - 20px)}
-  }
-}
+.zac-launch{position:fixed;right:22px;bottom:22px;z-index:9998;border:0;border-radius:999px;background:linear-gradient(135deg,#cda54c,#f0d98d);color:#30240e;font-weight:800;padding:14px 18px;box-shadow:0 12px 34px #0003;cursor:pointer;display:flex;gap:9px;align-items:center}.zac-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px #22c55e22}.zac-box{position:fixed;right:22px;bottom:82px;width:min(390px,calc(100vw - 24px));height:min(620px,calc(100vh - 110px));z-index:9999;background:#fff;border:1px solid #eadfca;border-radius:22px;box-shadow:0 24px 70px #0003;overflow:hidden;display:none;flex-direction:column}.zac-box.open{display:flex}.zac-head{background:linear-gradient(135deg,#3a3328,#17140f);color:#fff;padding:16px 17px;display:flex;align-items:center;gap:12px}.zac-avatar{overflow:hidden;width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#e9cf83,#a77b24);color:#20190d;font-weight:900;font-size:18px}.zac-title{font-weight:800}.zac-status{font-size:12px;opacity:.82}.zac-close{margin-left:auto;border:0;background:#ffffff16;color:#fff;width:34px;height:34px;border-radius:10px;font-size:20px;cursor:pointer}.zac-messages{flex:1;overflow:auto;padding:16px;background:#faf8f3}.zac-msg{max-width:86%;padding:11px 13px;border-radius:15px;margin:0 0 9px;font-size:14px;line-height:1.42;white-space:pre-line}.zac-msg.bot{background:#fff;border:1px solid #ece4d6;border-top-left-radius:5px}.zac-msg.user{background:#ead7a4;margin-left:auto;border-top-right-radius:5px;color:#30240e}.zac-options{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 13px}.zac-option{border:1px solid #cda54c;background:#fff;color:#725514;border-radius:999px;padding:9px 11px;font-weight:700;cursor:pointer;font-size:13px}.zac-option:hover{background:#fff8e8}.zac-inputbar{display:flex;gap:8px;padding:12px;border-top:1px solid #eee5d7;background:#fff}.zac-inputbar input{flex:1;border:1px solid #d8d1c5;border-radius:12px;padding:11px 12px;outline:none}.zac-send{border:0;border-radius:12px;padding:0 14px;background:#cda54c;font-weight:800;cursor:pointer}.zac-note{font-size:11px;color:#766f64;padding:0 14px 11px;background:#fff}.zac-summary{background:#fffaf0;border:1px solid #ead39b;border-radius:12px;padding:11px;margin-top:6px;font-size:13px}.zac-human{font-size:12px;text-align:center;color:#766f64;margin:10px 0}.zac-hidden{display:none!important}@media(max-width:600px){.zac-box{right:12px;bottom:72px;height:calc(100vh - 90px)}.zac-launch{right:12px;bottom:12px}}
 .zac-avatar img{width:100%;height:100%;object-fit:cover;object-position:38% 35%;transform:scale(1.7)}
+</style>
+
+<style id="guto-site-intro-style">
+.guto-site-intro{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;margin:20px 0 14px;padding:16px 18px;background:linear-gradient(135deg,#fff,#fffaf0);border:1px solid #ead9ad;border-radius:22px;box-shadow:0 10px 28px rgba(78,58,18,.08)}
+.guto-site-person{height:175px;display:flex;align-items:flex-end;justify-content:center;overflow:visible;padding-top:4px}
+.guto-site-person img{width:132px;height:auto;display:block;animation:gutoFloat 2.4s ease-in-out infinite;transform-origin:50% 100%}@keyframes gutoFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-7px) rotate(-1deg)}}
+.guto-site-bubble{position:relative;background:#fff;border:2px solid #d6ae52;border-radius:22px;padding:16px 18px;color:#27231c;font-size:15px;line-height:1.45;box-shadow:0 7px 18px rgba(0,0,0,.06)}
+.guto-site-bubble:before{content:'';position:absolute;left:-13px;top:45%;width:22px;height:22px;background:#fff;border-left:2px solid #d6ae52;border-bottom:2px solid #d6ae52;transform:rotate(45deg)}
+.guto-site-bubble strong{color:#977020}.guto-typing{display:inline-flex;gap:5px;align-items:center;height:22px}.guto-typing i{width:7px;height:7px;border-radius:50%;background:#b28a31;display:block;animation:gutoDot 1s infinite ease-in-out}.guto-typing i:nth-child(2){animation-delay:.15s}.guto-typing i:nth-child(3){animation-delay:.3s}@keyframes gutoDot{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-5px);opacity:1}}
+@media(max-width:620px){.guto-site-intro{grid-template-columns:105px 1fr;gap:10px;padding:12px}.guto-site-person{height:145px}.guto-site-person img{width:108px}.guto-site-bubble{font-size:13px;padding:13px 14px}}
 </style>
 </head>
 <body id="inicio">
@@ -144,7 +76,7 @@ footer{background:linear-gradient(115deg,#fff 10%,#f4ebd8 100%)}
 <section class="section wrap center"><h2>Como funciona?</h2><p class="subtitle">Conheça as etapas do atendimento.</p><div class="steps"><div class="step"><span class="step-number">1</span><div><h3>Conte o que<br>você precisa</h3><p>Escolha a opção de crédito do seu interesse.</p></div></div><div class="step"><span class="step-number">2</span><div><h3>Conheça<br>as condições</h3><p>Confira taxas, parcelas, prazo e custo total.</p></div></div><div class="step"><span class="step-number">3</span><div><h3>Decida com<br>tranquilidade</h3><p>Contratação sujeita à análise e à sua aprovação das condições.</p></div></div></div></section>
 <section id="produtos" class="products section"><div class="wrap center"><h2>Nossas principais soluções</h2><div class="underline"></div><div class="cards"><article class="card"><span class="product-icon inss" aria-hidden="true"></span><h3>INSS</h3><p>Aposentados e pensionistas</p><a class="interest" href="#atendimento" data-produto="Consignado INSS">Tenho interesse →</a></article><article class="card"><span class="product-icon server" aria-hidden="true"></span><h3>Servidores Públicos</h3><p>Federais, estaduais e municipais</p><a class="interest" href="#atendimento" data-produto="Consignado para servidor público">Tenho interesse →</a></article><article class="card"><span class="product-icon clt" aria-hidden="true"></span><h3>CLT</h3><p>Trabalhadores com carteira assinada</p><a class="interest" href="#atendimento" data-produto="Consignado CLT">Tenho interesse →</a></article><article class="card"><span class="product-icon port" aria-hidden="true"></span><h3>Portabilidade</h3><p>Compare condições para o seu contrato</p><a class="interest" href="#atendimento" data-produto="Portabilidade">Tenho interesse →</a></article></div></div></section>
 <section id="sobre" class="about"><div class="couple" role="img" aria-label="Casal sorrindo em uma composição com detalhes dourados"></div><div class="about-copy"><h2>Seu bem-estar<br>é a nossa prioridade.</h2><div class="underline" style="margin:18px 0"></div><p>Total Consignados.<br>Mais tranquilidade hoje, mais planos amanhã.</p></div></section>
-<section id="atendimento" class="wrap section contact"><div><div class="eyebrow">VAMOS CONVERSAR?</div><h2>Seu crédito,<br>nossa prioridade.</h2><p>Escolha uma opção para conhecer o atendimento.</p><p>Escolha com quem deseja falar pelo WhatsApp.</p><p class="fine">Izaque: <strong>(11) 96681-3544</strong> &nbsp; • &nbsp; Fabiane: <strong>(11) 96604-8067</strong></p></div><div class="panel"><h2 style="font-size:24px">Qual crédito você procura?</h2><div class="lead-fields"><div class="lead-field full"><label for="nome">Seu nome</label><input id="nome" type="text" autocomplete="name" placeholder="Digite seu nome" maxlength="80"></div><div class="lead-field full"><label for="telefone">Seu WhatsApp</label><input id="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999" maxlength="15"></div></div><label for="produto">Tipo de crédito</label><select id="produto"><option value="">Selecione uma opção</option><option>Consignado INSS</option><option>Consignado para servidor público</option><option>Consignado CLT</option><option>Portabilidade</option><option>Refinanciamento</option></select><p class="lead-help">Esses dados são usados apenas para montar a mensagem que será aberta no WhatsApp.</p><label class="consent-box"><input id="consentimento" type="checkbox"><span>Li e concordo com a <a href="#privacidade">Política de Privacidade</a> e autorizo o contato da Total Consignados para atendimento desta solicitação.</span></label><p id="orientacao" class="notice" aria-live="polite">Preencha seu nome, WhatsApp, selecione o tipo de crédito e escolha um atendente.</p><div class="whatsapp-actions"><button class="btn whatsapp-btn" type="button" data-atendente="Izaque" data-numero="5511966813544">Falar com Izaque</button><button class="btn whatsapp-btn" type="button" data-atendente="Fabiane" data-numero="5511966048067">Falar com Fabiane</button><button class="btn whatsapp-btn" type="button" data-atendente="Augusto" data-numero="5511951696289">Falar com Augusto</button></div></div></section>
+<section id="atendimento" class="wrap section contact"><div><div class="eyebrow">VAMOS CONVERSAR?</div><h2>Seu crédito,<br>nossa prioridade.</h2><p>Escolha uma opção para conhecer o atendimento.</p><p>Preencha seus dados e o Guto encaminha você para um de nossos consultores.</p></div><div class="panel"><h2 style="font-size:24px">Qual crédito você procura?</h2><div class="lead-fields"><div class="lead-field full"><label for="nome">Seu nome</label><input id="nome" type="text" autocomplete="name" placeholder="Digite seu nome" maxlength="80"></div><div class="lead-field full"><label for="telefone">Seu WhatsApp</label><input id="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999" maxlength="15"></div></div><label for="produto">Tipo de crédito</label><select id="produto"><option value="">Selecione uma opção</option><option>Consignado INSS</option><option>Consignado para servidor público</option><option>Consignado CLT</option><option>Portabilidade</option><option>Refinanciamento</option></select><p class="lead-help">Esses dados são usados apenas para montar a mensagem que será aberta no WhatsApp.</p><label class="consent-box"><input id="consentimento" type="checkbox"><span>Li e concordo com a <a href="#privacidade">Política de Privacidade</a> e autorizo o contato da Total Consignados para atendimento desta solicitação.</span></label><p id="orientacao" class="notice" aria-live="polite">Preencha seu nome, WhatsApp e selecione o tipo de crédito para continuar.</p><div class="guto-site-intro" aria-label="Guto, assistente da Total Consignados"><div class="guto-site-person"><img src="guto-novo-total.png?v=FINAL141" alt="Guto, assistente da Total Consignados"></div><div class="guto-site-bubble" id="gutoSiteBubble"><span class="guto-typing" aria-label="Guto está digitando"><i></i><i></i><i></i></span></div></div><div class="whatsapp-actions"><button class="btn whatsapp-btn" id="consultorBtn" type="button">💬 Falar com um consultor</button></div></div></section>
 <section id="duvidas" class="wrap section"><h2>Dúvidas frequentes</h2><details><summary>Como funciona a pré-análise?</summary><p>O Guto coleta informações iniciais para direcionar o atendimento. Valores e condições somente são confirmados após análise da instituição financeira.</p></details><details><summary>A aprovação do crédito é garantida?</summary><p>Não. A disponibilidade e a contratação dependem da análise e das condições da instituição financeira.</p></details><details><summary>Como falar com a Total Consignados?</summary><p>Escolha o tipo de crédito e fale pelo WhatsApp com Izaque, Fabiane ou Augusto.</p></details></section>
 
 <section id="privacidade" class="wrap legal-area">
@@ -180,10 +112,25 @@ footer{background:linear-gradient(115deg,#fff 10%,#f4ebd8 100%)}
 </main><footer><div class="wrap"><div class="footer-row"><a class="logo" href="#inicio" aria-label="Total Consignados — início"></a><nav aria-label="Menu do rodapé"><a href="#inicio">Início</a><a href="#sobre">Quem somos</a><a href="#produtos">Produtos</a><a href="#atendimento">Contato</a></nav><p class="footer-tag">Seu crédito,<br>nossa prioridade.</p></div><p>68.973.703 Izaque Batista dos Santos • CNPJ 68.973.703/0001-30</p><div class="legal-links"><a href="#privacidade">Política de Privacidade</a><a href="#termos">Termos de Uso</a></div><p class="fine">Crédito sujeito à análise e às condições da instituição financeira.</p></div></footer>
 <script>
 const produto=document.getElementById('produto');const orientacao=document.getElementById('orientacao');const nome=document.getElementById('nome');const telefone=document.getElementById('telefone');const consentimento=document.getElementById('consentimento');
-function atualizarOrientacao(){orientacao.textContent=produto.value?'Opção selecionada: '+produto.value+'. Agora escolha Izaque, Fabiane ou Augusto para continuar no WhatsApp.':'Preencha seu nome, WhatsApp, selecione o tipo de crédito e escolha um atendente.';}
+function atualizarOrientacao(){orientacao.textContent=produto.value?'Opção selecionada: '+produto.value+'. Clique em Falar com um consultor para continuar no WhatsApp.':'Preencha seu nome, WhatsApp e selecione o tipo de crédito para continuar.';}
 telefone.addEventListener('input',function(){let v=this.value.replace(/\D/g,'').slice(0,11);if(v.length>10)this.value='('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);else if(v.length>6)this.value='('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);else if(v.length>2)this.value='('+v.slice(0,2)+') '+v.slice(2);else if(v.length)this.value='('+v;});
 produto.addEventListener('change',atualizarOrientacao);document.querySelectorAll('[data-produto]').forEach(function(link){link.addEventListener('click',function(){produto.value=link.dataset.produto;atualizarOrientacao();});});
-document.querySelectorAll('.whatsapp-btn').forEach(function(btn){btn.addEventListener('click',function(){const n=nome.value.trim();const t=telefone.value.trim();if(!n){orientacao.textContent='Digite seu nome para continuar.';nome.focus();return;}if(t.replace(/\D/g,'').length<10){orientacao.textContent='Digite um WhatsApp válido para continuar.';telefone.focus();return;}if(!produto.value){orientacao.textContent='Selecione primeiro o tipo de crédito que você procura.';produto.focus();return;}if(!consentimento.checked){orientacao.textContent='Para continuar, marque a opção de concordância com a Política de Privacidade.';consentimento.focus();return;}const msg='Olá, '+btn.dataset.atendente+'! Vim pelo site da Total Consignados. Meu nome é '+n+', meu WhatsApp é '+t+' e tenho interesse em '+produto.value+'. Gostaria de fazer uma simulação.';window.open('https://wa.me/'+btn.dataset.numero+'?text='+encodeURIComponent(msg),'_blank','noopener');});});
+const consultores=[{nome:'Izaque',numero:'5511966813544'},{nome:'Fabiane',numero:'5511966048067'},{nome:'Augusto',numero:'5511951696289'}];document.querySelectorAll('.whatsapp-btn').forEach(function(btn){btn.addEventListener('click',function(){const n=nome.value.trim();const t=telefone.value.trim();if(!n){orientacao.textContent='Digite seu nome para continuar.';nome.focus();return;}if(t.replace(/\D/g,'').length<10){orientacao.textContent='Digite um WhatsApp válido para continuar.';telefone.focus();return;}if(!produto.value){orientacao.textContent='Selecione primeiro o tipo de crédito que você procura.';produto.focus();return;}if(!consentimento.checked){orientacao.textContent='Para continuar, marque a opção de concordância com a Política de Privacidade.';consentimento.focus();return;}let idx=parseInt(localStorage.getItem('totalConsultorIdx')||'0',10)%consultores.length;const c=consultores[idx];localStorage.setItem('totalConsultorIdx',String((idx+1)%consultores.length));const msg='Olá, '+c.nome+'! Vim pelo site da Total Consignados. Meu nome é '+n+', meu WhatsApp é '+t+' e tenho interesse em '+produto.value+'. Gostaria de fazer uma simulação.';window.open('https://wa.me/'+c.numero+'?text='+encodeURIComponent(msg),'_blank','noopener');});});
+
+const gutoBubble=document.getElementById('gutoSiteBubble');
+if(gutoBubble){
+  const fala='Oi! Eu sou o Guto, assistente da Total Consignados. 👋 Já vou te encaminhar para um de nossos consultores!';
+  const chars=Array.from(fala);
+  gutoBubble.innerHTML='<span class="guto-typing" aria-label="Guto está digitando"><i></i><i></i><i></i></span>';
+  setTimeout(function(){
+    gutoBubble.textContent='';
+    let i=0;
+    function digitar(){
+      if(i<chars.length){gutoBubble.textContent+=chars[i++];setTimeout(digitar,32);}
+    }
+    digitar();
+  },1300);
+}
 </script>
 <button id="zacLaunch" class="zac-launch" type="button" aria-label="Abrir atendimento com Guto"><span class="zac-dot"></span>💬 Fale com o Guto</button>
 <section id="zacBox" class="zac-box" aria-label="Guto, assistente da Total Consignados">
@@ -259,37 +206,4 @@ document.querySelectorAll('.whatsapp-btn').forEach(function(btn){btn.addEventLis
  input.addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
 })();
 </script>
-
-<script>
-(function(){
-  function ajustarGutoAoTeclado(){
-    if (!window.matchMedia('(max-width: 600px)').matches) return;
-    var box = document.querySelector('.zac-box');
-    if (!box) return;
-    var vv = window.visualViewport;
-    if (vv) {
-      var margem = 10;
-      var altura = Math.max(280, vv.height - (margem * 2));
-      box.style.height = altura + 'px';
-      box.style.maxHeight = altura + 'px';
-      box.style.bottom = Math.max(margem, window.innerHeight - vv.height - vv.offsetTop + margem) + 'px';
-    }
-  }
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', ajustarGutoAoTeclado);
-    window.visualViewport.addEventListener('scroll', ajustarGutoAoTeclado);
-  }
-  window.addEventListener('resize', ajustarGutoAoTeclado);
-  window.addEventListener('orientationchange', function(){ setTimeout(ajustarGutoAoTeclado, 150); });
-  document.addEventListener('focusin', function(e){
-    if(e.target && e.target.closest && e.target.closest('.zac-box')){
-      setTimeout(ajustarGutoAoTeclado, 100);
-    }
-  });
-  document.addEventListener('focusout', function(){ setTimeout(ajustarGutoAoTeclado, 180); });
-  document.addEventListener('DOMContentLoaded', ajustarGutoAoTeclado);
-  setTimeout(ajustarGutoAoTeclado, 50);
-})();
-</script>
-
 </body></html>
