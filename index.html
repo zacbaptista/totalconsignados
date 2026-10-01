@@ -56,7 +56,6 @@ footer{background:linear-gradient(115deg,#fff 10%,#f4ebd8 100%)}
 <style id="zac-chat-style">
 .zac-launch{position:fixed;right:22px;bottom:22px;z-index:9998;border:0;border-radius:999px;background:linear-gradient(135deg,#cda54c,#f0d98d);color:#30240e;font-weight:800;padding:14px 18px;box-shadow:0 12px 34px #0003;cursor:pointer;display:flex;gap:9px;align-items:center}.zac-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px #22c55e22}.zac-box{position:fixed;right:22px;bottom:82px;width:min(390px,calc(100vw - 24px));height:min(620px,calc(100vh - 110px));z-index:9999;background:#fff;border:1px solid #eadfca;border-radius:22px;box-shadow:0 24px 70px #0003;overflow:hidden;display:none;flex-direction:column}.zac-box.open{display:flex}.zac-head{background:linear-gradient(135deg,#3a3328,#17140f);color:#fff;padding:16px 17px;display:flex;align-items:center;gap:12px}.zac-avatar{overflow:hidden;width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#e9cf83,#a77b24);color:#20190d;font-weight:900;font-size:18px}.zac-title{font-weight:800}.zac-status{font-size:12px;opacity:.82}.zac-close{margin-left:auto;border:0;background:#ffffff16;color:#fff;width:34px;height:34px;border-radius:10px;font-size:20px;cursor:pointer}.zac-messages{flex:1;overflow:auto;padding:16px;background:#faf8f3}.zac-msg{max-width:86%;padding:11px 13px;border-radius:15px;margin:0 0 9px;font-size:14px;line-height:1.42;white-space:pre-line}.zac-msg.bot{background:#fff;border:1px solid #ece4d6;border-top-left-radius:5px}.zac-msg.user{background:#ead7a4;margin-left:auto;border-top-right-radius:5px;color:#30240e}.zac-options{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 13px}.zac-option{border:1px solid #cda54c;background:#fff;color:#725514;border-radius:999px;padding:9px 11px;font-weight:700;cursor:pointer;font-size:13px}.zac-option:hover{background:#fff8e8}.zac-inputbar{display:flex;gap:8px;padding:12px;border-top:1px solid #eee5d7;background:#fff}.zac-inputbar input{flex:1;border:1px solid #d8d1c5;border-radius:12px;padding:11px 12px;outline:none}.zac-send{border:0;border-radius:12px;padding:0 14px;background:#cda54c;font-weight:800;cursor:pointer}.zac-note{font-size:11px;color:#766f64;padding:0 14px 11px;background:#fff}.zac-summary{background:#fffaf0;border:1px solid #ead39b;border-radius:12px;padding:11px;margin-top:6px;font-size:13px}.zac-human{font-size:12px;text-align:center;color:#766f64;margin:10px 0}.zac-hidden{display:none!important}@media(max-width:600px){.zac-box{right:12px;bottom:72px;height:calc(100vh - 90px)}.zac-launch{right:12px;bottom:12px}}
 .zac-avatar img{width:100%;height:100%;object-fit:cover;object-position:38% 35%;transform:scale(1.7)}
-.zac-rating{background:#fff;border:1px solid #ead39b;border-radius:16px;padding:14px;margin:10px 0;text-align:center}.zac-rating-title{font-weight:800;color:#4b3915;margin-bottom:4px}.zac-rating-sub{font-size:12px;color:#766f64;margin-bottom:10px}.zac-stars{display:flex;justify-content:center;gap:6px}.zac-star{border:0;background:transparent;font-size:34px;line-height:1;cursor:pointer;color:#d6cfc2;padding:2px;transition:transform .15s,color .15s}.zac-star:hover,.zac-star.active{color:#d4a72c;transform:scale(1.12)}.zac-rating-status{font-size:13px;color:#725514;margin-top:8px;min-height:18px}
 </style>
 
 <style id="guto-site-intro-style">
@@ -112,19 +111,11 @@ footer{background:linear-gradient(115deg,#fff 10%,#f4ebd8 100%)}
 </section>
 </main><footer><div class="wrap"><div class="footer-row"><a class="logo" href="#inicio" aria-label="Total Consignados — início"></a><nav aria-label="Menu do rodapé"><a href="#inicio">Início</a><a href="#sobre">Quem somos</a><a href="#produtos">Produtos</a><a href="#atendimento">Contato</a></nav><p class="footer-tag">Seu crédito,<br>nossa prioridade.</p></div><p>68.973.703 Izaque Batista dos Santos • CNPJ 68.973.703/0001-30</p><div class="legal-links"><a href="#privacidade">Política de Privacidade</a><a href="#termos">Termos de Uso</a></div><p class="fine">Crédito sujeito à análise e às condições da instituição financeira.</p></div></footer>
 <script>
-const TOTAL_API='https://upturned-wobbling-prolonged.ngrok-free.dev';
-async function enviarLeadTotal(dados){
-  const r=await fetch(TOTAL_API+'/api/site/leads',{method:'POST',headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},body:JSON.stringify(dados)});
-  if(!r.ok) throw new Error('Falha ao enviar atendimento');
-  const j=await r.json();
-  if(!j.ok) throw new Error(j.erro||'Falha ao enviar atendimento');
-  return j;
-}
 const produto=document.getElementById('produto');const orientacao=document.getElementById('orientacao');const nome=document.getElementById('nome');const telefone=document.getElementById('telefone');const consentimento=document.getElementById('consentimento');
 function atualizarOrientacao(){orientacao.textContent=produto.value?'Opção selecionada: '+produto.value+'. Clique em Falar com um consultor para continuar no WhatsApp.':'Preencha seu nome, WhatsApp e selecione o tipo de crédito para continuar.';}
 telefone.addEventListener('input',function(){let v=this.value.replace(/\D/g,'').slice(0,11);if(v.length>10)this.value='('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);else if(v.length>6)this.value='('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);else if(v.length>2)this.value='('+v.slice(0,2)+') '+v.slice(2);else if(v.length)this.value='('+v;});
 produto.addEventListener('change',atualizarOrientacao);document.querySelectorAll('[data-produto]').forEach(function(link){link.addEventListener('click',function(){produto.value=link.dataset.produto;atualizarOrientacao();});});
-document.querySelectorAll('.whatsapp-btn').forEach(function(btn){btn.addEventListener('click',async function(){const n=nome.value.trim();const t=telefone.value.trim();if(!n){orientacao.textContent='Digite seu nome para continuar.';nome.focus();return;}if(t.replace(/\D/g,'').length<10){orientacao.textContent='Digite um WhatsApp válido para continuar.';telefone.focus();return;}if(!produto.value){orientacao.textContent='Selecione primeiro o tipo de crédito que você procura.';produto.focus();return;}if(!consentimento.checked){orientacao.textContent='Para continuar, marque a opção de concordância com a Política de Privacidade.';consentimento.focus();return;}btn.disabled=true;orientacao.textContent='Encaminhando seu atendimento para a Total Consignados...';try{const resp=await enviarLeadTotal({nome:n,telefone:t,produto:produto.value,mensagem:'Lead enviado pelo formulário principal do site.',origem:'Formulário do site'});const c=resp.responsavel||'Izaque';const numero=resp.whatsapp||'5511966813544';orientacao.textContent='Pronto! Seu atendimento foi encaminhado para '+c+'.';const msg='Olá, '+c+'! Vim pelo site da Total Consignados. Meu nome é '+n+', meu WhatsApp é '+t+' e tenho interesse em '+produto.value+'. Gostaria de fazer uma simulação.';window.open('https://wa.me/'+numero+'?text='+encodeURIComponent(msg),'_blank','noopener');}catch(e){orientacao.textContent='Não foi possível encaminhar agora. Tente novamente em instantes.';}finally{btn.disabled=false;}});});
+const consultores=[{nome:'Izaque',numero:'5511966813544'},{nome:'Fabiane',numero:'5511966048067'},{nome:'Augusto',numero:'5511951696289'}];document.querySelectorAll('.whatsapp-btn').forEach(function(btn){btn.addEventListener('click',function(){const n=nome.value.trim();const t=telefone.value.trim();if(!n){orientacao.textContent='Digite seu nome para continuar.';nome.focus();return;}if(t.replace(/\D/g,'').length<10){orientacao.textContent='Digite um WhatsApp válido para continuar.';telefone.focus();return;}if(!produto.value){orientacao.textContent='Selecione primeiro o tipo de crédito que você procura.';produto.focus();return;}if(!consentimento.checked){orientacao.textContent='Para continuar, marque a opção de concordância com a Política de Privacidade.';consentimento.focus();return;}let idx=parseInt(localStorage.getItem('totalConsultorIdx')||'0',10)%consultores.length;const c=consultores[idx];localStorage.setItem('totalConsultorIdx',String((idx+1)%consultores.length));const msg='Olá, '+c.nome+'! Vim pelo site da Total Consignados. Meu nome é '+n+', meu WhatsApp é '+t+' e tenho interesse em '+produto.value+'. Gostaria de fazer uma simulação.';window.open('https://wa.me/'+c.numero+'?text='+encodeURIComponent(msg),'_blank','noopener');});});
 
 const gutoBubble=document.getElementById('gutoSiteBubble');
 if(gutoBubble){
@@ -154,7 +145,11 @@ if(gutoBubble){
  const launch=document.getElementById('zacLaunch'), box=document.getElementById('zacBox'), close=document.getElementById('zacClose'), msgs=document.getElementById('zacMessages'), bar=document.getElementById('zacInputBar'), input=document.getElementById('zacInput'), send=document.getElementById('zacSend');
  const products=['INSS Novo','Refinanciamento','Portabilidade','Empréstimo CLT','FGTS','Falar com atendente'];
  let step='start';
+ const API_BASE='https://sistema.totalconsignados.com.br';
  const lead={};
+ let liveTimer=null;
+ const liveSeen=new Set();
+ let liveFinalizado=false;
  function resetLead(){Object.keys(lead).forEach(k=>delete lead[k]);}
  function scroll(){msgs.scrollTop=msgs.scrollHeight}
  function bot(t){const d=document.createElement('div');d.className='zac-msg bot';d.textContent=t;msgs.appendChild(d);scroll()}
@@ -163,7 +158,7 @@ if(gutoBubble){
  function askText(question,next,placeholder){bot(question);step=next;bar.classList.remove('zac-hidden');input.placeholder=placeholder||'Digite aqui...';input.value='';input.focus()}
  function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
  function brl(raw){const digits=String(raw).replace(/\D/g,'');if(!digits)return '';return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(digits)/100)}
- function start(){resetLead();step='start';msgs.innerHTML='';bar.classList.add('zac-hidden');bot('Olá! 👋 Eu sou o Guto, assistente da Total Consignados. Vou te ajudar com seu pré-atendimento.');bot('As informações e simulações são estimativas e estão sujeitas à análise e aprovação da instituição financeira.');bot('Qual opção você procura?');options(products,chooseProduct)}
+ function start(){stopLive();liveFinalizado=false;resetLead();step='start';msgs.innerHTML='';bar.classList.add('zac-hidden');bot('Olá! 👋 Eu sou o Guto, assistente da Total Consignados. Vou te ajudar com seu pré-atendimento.');bot('As informações e simulações são estimativas e estão sujeitas à análise e aprovação da instituição financeira.');bot('Qual opção você procura?');options(products,chooseProduct)}
  function chooseProduct(x){lead.produto=x;if(x==='Falar com atendente'){askText('Claro. Qual é o seu nome?','name','Seu nome');return}bot('Perfeito. Vou fazer algumas perguntas rápidas para direcionar seu atendimento de '+x+'.');askText('Primeiro, qual é o seu nome?','name','Seu nome')}
  function afterName(){askText('Obrigado, '+lead.nome+'. Qual é o seu WhatsApp com DDD?','phone','(11) 99999-9999')}
  function afterPhone(){bar.classList.add('zac-hidden');
@@ -186,40 +181,56 @@ if(gutoBubble){
  function cltStart(){bot('Você está trabalhando com carteira assinada atualmente?');options(['Sim','Não'],x=>{lead.registrado=x;if(x==='Não')return finish();askText('Há quanto tempo você está no emprego atual?','cltTempo','Ex.: 1 ano e 6 meses')})}
  function afterCltTempo(){bar.classList.add('zac-hidden');bot('A empresa onde você trabalha é pública ou privada?');options(['Privada','Pública','Não sei'],x=>{lead.tipoEmpresa=x;bot('Você já possui Crédito do Trabalhador / consignado CLT?');options(['Sim','Não','Não sei'],y=>{lead.temClt=y;finish()})})}
  function fgtsStart(){bot('Você consegue acessar o aplicativo FGTS?');options(['Sim','Não'],x=>{lead.acessoFgts=x;finish()})}
+ function stopLive(){if(liveTimer){clearInterval(liveTimer);liveTimer=null}}
+ function liveMsg(t,autor){
+   const d=document.createElement('div');d.className='zac-msg bot';
+   d.textContent=(autor&&autor!=='Guto'&&autor!=='Sistema'?autor+': ':'')+t;
+   msgs.appendChild(d);scroll();
+ }
+ async function pollLive(){
+   if(!lead.atendimentoId||!lead.chatToken||liveFinalizado)return;
+   try{
+     const r=await fetch(API_BASE+'/api/site/chat/'+encodeURIComponent(lead.atendimentoId)+'?token='+encodeURIComponent(lead.chatToken),{cache:'no-store'});
+     const data=await r.json();
+     if(!r.ok||!data.ok)return;
+     (data.mensagens||[]).forEach(m=>{
+       const id=String(m.id);
+       if(liveSeen.has(id))return;
+       liveSeen.add(id);
+       if(m.tipo==='atendente') liveMsg(m.mensagem,m.autor);
+       else if(m.tipo==='sistema' && m.id>0) liveMsg(m.mensagem,'Sistema');
+     });
+     if(data.status==='Finalizado'&&!liveFinalizado){
+       liveFinalizado=true;stopLive();bar.classList.add('zac-hidden');
+       bot('Atendimento finalizado. Obrigado por falar com a Total Consignados. 💛');
+     }
+   }catch(e){}
+ }
+ function startLive(){
+   stopLive();liveSeen.clear();liveFinalizado=false;step='live';
+   bar.classList.remove('zac-hidden');input.placeholder='Digite sua mensagem para o atendente...';input.value='';
+   pollLive();liveTimer=setInterval(pollLive,2000);
+ }
+ async function sendLive(v){
+   if(!lead.atendimentoId||!lead.chatToken)return;
+   user(v);
+   try{
+     const r=await fetch(API_BASE+'/api/site/chat/'+encodeURIComponent(lead.atendimentoId),{
+       method:'POST',headers:{'Content-Type':'application/json'},
+       body:JSON.stringify({token:lead.chatToken,mensagem:v})
+     });
+     const data=await r.json();
+     if(!r.ok||!data.ok)throw new Error();
+   }catch(e){bot('Não consegui enviar essa mensagem agora. Tente novamente em instantes.')}
+ }
  function resumoValor(v){return v==='Não sei'?'Não informado':v;}
  function summaryRows(){let r=[['Nome',lead.nome],['WhatsApp',lead.telefone],['Interesse',lead.produto]];
    if(lead.tipoBeneficio)r.push(['Benefício',lead.tipoBeneficio]); if(lead.beneficio)r.push(['Nº do benefício',lead.beneficio]); if(lead.valorBeneficio)r.push(['Valor aproximado do benefício',lead.valorBeneficio]); if(lead.temEmprestimos)r.push(['Já possui consignados',lead.temEmprestimos]); if(lead.margem)r.push(['Sabe se possui margem',lead.margem]);
    if(lead.banco)r.push(['Banco atual',lead.banco]); if(lead.valorParcela)r.push(['Parcela aproximada',lead.valorParcela]); if(lead.qtdContratos)r.push(['Quantidade de contratos',lead.qtdContratos]); if(lead.parcelasRestantes)r.push(['Parcelas restantes',lead.parcelasRestantes]); if(lead.objetivo)r.push(['Objetivo',lead.objetivo]);
    if(lead.registrado)r.push(['Carteira assinada atualmente',lead.registrado]); if(lead.tempoEmprego)r.push(['Tempo no emprego atual',lead.tempoEmprego]); if(lead.tipoEmpresa)r.push(['Empresa',lead.tipoEmpresa]); if(lead.temClt)r.push(['Já possui consignado CLT',lead.temClt]); if(lead.acessoFgts)r.push(['Acesso ao app FGTS',lead.acessoFgts]); return r.map(([k,v])=>[k,resumoValor(v)]); }
- async function enviarChatParaSistema(){
-   if(lead._enviadoSistema)return true;
-   const resumo=summaryRows().map(([k,v])=>k+': '+v).join(' | ');
-   try{const resp=await enviarLeadTotal({nome:lead.nome||'',telefone:lead.telefone||'',produto:lead.produto||'Chat do Guto',mensagem:'Pré-atendimento pelo Chat do Guto. '+resumo,origem:'Chat do Guto'});lead._enviadoSistema=true;lead._chatId=resp.id;lead._chatToken=resp.token;return true;}catch(e){return false;}
- }
- const liveSeen=new Set(); let liveTimer=null;
- async function pollLive(){
-   if(!lead._chatId||!lead._chatToken)return;
-   try{const r=await fetch(TOTAL_API+'/api/site/chat/'+lead._chatId+'?token='+encodeURIComponent(lead._chatToken),{headers:{'ngrok-skip-browser-warning':'true'}});const j=await r.json();if(!j.ok)return;
-     (j.mensagens||[]).forEach(m=>{if(liveSeen.has(m.id))return;liveSeen.add(m.id);if(m.tipo==='atendente'){bot(m.autor+': '+m.mensagem)}else if(m.tipo==='sistema'){bot(m.mensagem)}});
-     if(j.status==='Finalizado'){step='finalizado';bar.classList.add('zac-hidden');if(liveTimer){clearInterval(liveTimer);liveTimer=null}bot('Atendimento finalizado.');if(j.avaliacao_estrelas){bot('Obrigado pela sua avaliação! 💛');options(['Iniciar novo atendimento'],start)}else{mostrarAvaliacao()}}
-   }catch(e){}
- }
- async function enviarAvaliacao(estrelas,box){
-   const status=box.querySelector('.zac-rating-status');
-   box.querySelectorAll('.zac-star').forEach((b,i)=>{b.disabled=true;if(i<estrelas)b.classList.add('active')});
-   status.textContent='Enviando sua avaliação...';
-   try{const r=await fetch(TOTAL_API+'/api/site/chat/'+lead._chatId+'/avaliar',{method:'POST',headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},body:JSON.stringify({token:lead._chatToken,estrelas:estrelas})});const j=await r.json();if(!j.ok)throw new Error(j.erro||'Erro');box.remove();bot('Obrigado pela sua avaliação! 💛');options(['Iniciar novo atendimento'],start)}catch(e){box.querySelectorAll('.zac-star').forEach(b=>b.disabled=false);status.textContent='Não consegui registrar agora. Toque em uma estrela para tentar novamente.';}
- }
- function mostrarAvaliacao(){
-   const d=document.createElement('div');d.className='zac-rating';d.innerHTML='<div class="zac-rating-title">Como foi seu atendimento?</div><div class="zac-rating-sub">Avalie sua experiência com a Total Consignados.</div><div class="zac-stars" aria-label="Avaliação de 1 a 5 estrelas"></div><div class="zac-rating-status" aria-live="polite"></div>';
-   const stars=d.querySelector('.zac-stars');for(let i=1;i<=5;i++){const b=document.createElement('button');b.type='button';b.className='zac-star';b.textContent='★';b.setAttribute('aria-label',i+' estrela'+(i>1?'s':''));b.onclick=()=>enviarAvaliacao(i,d);stars.appendChild(b)}msgs.appendChild(d);scroll();
- }
- function iniciarChatHumano(){step='live';bar.classList.remove('zac-hidden');input.placeholder='Digite sua mensagem para Izaque...';bot('Você pode continuar por aqui. Quando Izaque assumir, as mensagens dele aparecerão neste chat.');pollLive();if(liveTimer)clearInterval(liveTimer);liveTimer=setInterval(pollLive,2000);input.focus()}
- async function enviarLive(v){
-   try{const r=await fetch(TOTAL_API+'/api/site/chat/'+lead._chatId,{method:'POST',headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},body:JSON.stringify({token:lead._chatToken,mensagem:v})});const j=await r.json();if(!j.ok)bot('Não consegui enviar essa mensagem agora. Tente novamente.')}catch(e){bot('Conexão temporariamente indisponível. Tente novamente.')}
- }
- function finish(){bar.classList.add('zac-hidden');bot('Pré-atendimento concluído ✅');const d=document.createElement('div');d.className='zac-summary';d.innerHTML='<strong>Resumo</strong><br>'+summaryRows().map(([k,v])=>esc(k)+': '+esc(v)).join('<br>')+'<br><br><strong>Esta pré-análise não garante aprovação ou liberação de crédito.</strong>';msgs.appendChild(d);const h=document.createElement('div');h.className='zac-human';h.textContent='Pronto, '+lead.nome+'! Estou encaminhando suas informações para a Total Consignados...';msgs.appendChild(h);scroll();enviarChatParaSistema().then(ok=>{h.textContent=ok?'Pronto, '+lead.nome+'! Suas informações foram encaminhadas para Izaque. Você pode continuar conversando por aqui.':'Não consegui encaminhar automaticamente agora. Tente novamente em instantes.';scroll();if(ok)iniciarChatHumano();else options(['Fazer outro atendimento'],start);});}
- function submit(){let v=input.value.trim();if(!v)return;input.value='';if(step==='live'){user(v);enviarLive(v);return;}
+ async function finish(){bar.classList.add('zac-hidden');bot('Pré-atendimento concluído ✅');const rows=summaryRows();const d=document.createElement('div');d.className='zac-summary';d.innerHTML='<strong>Resumo</strong><br>'+rows.map(([k,v])=>esc(k)+': '+esc(v)).join('<br>')+'<br><br><strong>Esta pré-análise não garante aprovação ou liberação de crédito.</strong>';msgs.appendChild(d);scroll();bot('Só um instante. Estou encaminhando você para nossa equipe...');try{const resp=await fetch(API_BASE+'/api/site/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome:lead.nome||'',telefone:lead.telefone||'',email:'',produto:lead.produto||'Atendimento',mensagem:'Chat do Guto | '+rows.map(([k,v])=>k+': '+v).join(' | '),origem:'Chat do Guto'})});const data=await resp.json();if(!resp.ok||!data.ok)throw new Error(data.erro||'Falha ao encaminhar');lead.atendimentoId=data.id;lead.chatToken=data.token;const h=document.createElement('div');h.className='zac-human';if(data.responsavel){h.textContent='Pronto, '+lead.nome+'! Seu atendimento foi encaminhado para '+data.responsavel+'. Continue por aqui que a equipe poderá responder pelo sistema.';}else if(data.fila_posicao){h.textContent='Pronto, '+lead.nome+'! Você entrou na fila de atendimento na posição '+data.fila_posicao+'. Continue por aqui.';}else{h.textContent='Pronto, '+lead.nome+'! Seu atendimento foi encaminhado para a equipe da Total Consignados.';}msgs.appendChild(h);scroll();startLive();}catch(e){const h=document.createElement('div');h.className='zac-human';h.textContent='Não consegui encaminhar automaticamente agora. Você pode falar com nossa equipe pelo WhatsApp abaixo.';msgs.appendChild(h);const w=document.createElement('div');w.className='zac-options';const b=document.createElement('button');b.type='button';b.className='zac-option';b.textContent='Abrir WhatsApp';b.onclick=()=>{document.getElementById('consultorBtn').click()};w.appendChild(b);msgs.appendChild(w);options(['Tentar novo atendimento'],start);scroll();}}
+ function submit(){let v=input.value.trim();if(!v)return;input.value='';
+   if(step==='live'){sendLive(v);return}
    if(step==='phone' && v.replace(/\D/g,'').length<10){bot('Digite um número com DDD para eu conseguir direcionar seu atendimento.');return}
    if(['inssValor','refinParcela','portParcela'].includes(step)){v=brl(v);if(!v){bot('Digite um valor válido para continuar.');return}}
    user(v);
@@ -236,8 +247,8 @@ if(gutoBubble){
    else if(step==='cltTempo'){lead.tempoEmprego=/^\d+$/.test(v)?(v==='1'?'1 mês':v+' meses'):v;afterCltTempo()}
    else if(step==='detail'){lead.detalhe=v;finish()}
  }
- launch.onclick=()=>{box.classList.add('open');launch.classList.add('zac-hidden');if(!msgs.children.length)start()};
- close.onclick=()=>{box.classList.remove('open');launch.classList.remove('zac-hidden')}; send.onclick=submit;
+ launch.onclick=()=>{box.classList.add('open');launch.classList.add('zac-hidden');if(!msgs.children.length)start();else if(lead.atendimentoId&&lead.chatToken&&!liveFinalizado)startLive()};
+ close.onclick=()=>{box.classList.remove('open');launch.classList.remove('zac-hidden');stopLive()}; send.onclick=submit;
  input.addEventListener('input',function(){if(step==='phone'){let v=this.value.replace(/\D/g,'').slice(0,11);if(v.length>10)this.value='('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);else if(v.length>6)this.value='('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);else if(v.length>2)this.value='('+v.slice(0,2)+') '+v.slice(2);else if(v.length)this.value='('+v;return}if(['inssValor','refinParcela','portParcela'].includes(step)){this.value=brl(this.value)}});
  input.addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
 })();
