@@ -367,7 +367,7 @@ window.zacHorario = {
    else if(horarioAnterior===false){input.disabled=false;send.disabled=false;msgs.innerHTML='';resetLead();if(box.classList.contains('open'))start();}
    horarioAnterior=aberto;
  }
- function resetLead(){Object.keys(lead).forEach(k=>delete lead[k]);}
+ function resetLead(){document.getElementById('zacAiTools')?.remove();iaRequest=null;Object.keys(lead).forEach(k=>delete lead[k]);}
  function scroll(){msgs.scrollTop=msgs.scrollHeight}
  function bot(t){const d=document.createElement('div');d.className='zac-msg bot';d.textContent=t;msgs.appendChild(d);scroll()}
  function user(t){const d=document.createElement('div');d.className='zac-msg user';d.textContent=t;msgs.appendChild(d);scroll()}
@@ -375,10 +375,61 @@ window.zacHorario = {
  function askText(question,next,placeholder){if(bloquearForaDoHorario())return;bot(question);step=next;bar.classList.remove('zac-hidden');input.placeholder=placeholder||'Digite aqui...';input.value='';input.focus()}
  function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
  function brl(raw){const digits=String(raw).replace(/\D/g,'');if(!digits)return '';return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(digits)/100)}
- function start(){if(bloquearForaDoHorario())return;stopLive();liveFinalizado=false;resetLead();step='start';msgs.innerHTML='';bar.classList.add('zac-hidden');bot('Olá! 👋 Eu sou o Zac, assistente da Total Consignados. Vou te ajudar com seu pré-atendimento.');bot('As informações e simulações são estimativas e estão sujeitas à análise e aprovação da instituição financeira.');if(window.__tcSimulacao){lead.produto='INSS Novo';lead.simParcela=window.__tcSimulacao.parcela;lead.simPrazo=window.__tcSimulacao.prazo;lead.simValor=window.__tcSimulacao.valor;lead.simCoeficiente=window.__tcSimulacao.coeficiente;lead.vemSimulador=true;bot('Vi sua simulação de '+moedaBR(lead.simValor)+' em '+lead.simPrazo+'x, com parcela de '+moedaBR(lead.simParcela)+'.');askText('Para continuar com essa condição, qual é o seu nome?','name','Seu nome');return}bot('Qual opção você procura?');options(products,chooseProduct)}
+ function start(){if(bloquearForaDoHorario())return;if(!lead.iaSession&&aiSaved()&&!window.__tcSimulacao){aiOfferResume();return;}stopLive();liveFinalizado=false;resetLead();step='start';msgs.innerHTML='';bar.classList.add('zac-hidden');bot('Olá! 👋 Eu sou o Zac, assistente da Total Consignados. Vou te ajudar com seu pré-atendimento.');bot('As informações e simulações são estimativas e estão sujeitas à análise e aprovação da instituição financeira.');if(window.__tcSimulacao){lead.produto='INSS Novo';lead.simParcela=window.__tcSimulacao.parcela;lead.simPrazo=window.__tcSimulacao.prazo;lead.simValor=window.__tcSimulacao.valor;lead.simCoeficiente=window.__tcSimulacao.coeficiente;lead.vemSimulador=true;bot('Vi sua simulação de '+moedaBR(lead.simValor)+' em '+lead.simPrazo+'x, com parcela de '+moedaBR(lead.simParcela)+'.');askText('Para continuar com essa condição, qual é o seu nome?','name','Seu nome');return}bot('Qual opção você procura?');options(products,chooseProduct)}
  function chooseProduct(x){lead.produto=x;if(x==='Falar com atendente'){askText('Claro. Qual é o seu nome?','name','Seu nome');return}bot('Perfeito. Vou fazer algumas perguntas rápidas para direcionar seu atendimento de '+x+'.');askText('Primeiro, qual é o seu nome?','name','Seu nome')}
  function afterName(){askText('Obrigado, '+lead.nome+'. Qual é o seu WhatsApp com DDD?','phone','(11) 99999-9999')}
- function afterPhone(){bar.classList.add('zac-hidden');
+  const IA_SAVE_KEY='tc_zac_ai_resume_v1';
+ function aiSave(){try{localStorage.setItem(IA_SAVE_KEY,JSON.stringify({session:lead.iaSession,token:lead.iaToken,sim:lead.simValor?{parcela:lead.simParcela,prazo:lead.simPrazo,valor:lead.simValor,coef:lead.simCoeficiente}:null}));return true;}catch(e){return false;}}
+ function aiSaved(){try{const j=JSON.parse(localStorage.getItem(IA_SAVE_KEY)||'null');return j&&j.session&&j.token?j:null;}catch(e){return null;}}
+ function aiForget(){try{localStorage.removeItem(IA_SAVE_KEY);}catch(e){}}
+ function aiOfferResume(){
+   msgs.innerHTML='';bar.classList.add('zac-hidden');bot('Você tem uma conversa salva. Quer continuar de onde parou?');
+   options(['Continuar conversa','Começar outra conversa'],x=>{if(x==='Continuar conversa')aiResume();else{aiForget();resetLead();start();}});
+ }
+ async function aiResume(){const saved=aiSaved();if(!saved){start();return;}step='ai_wait';
+   try{const r=await fetch(API_BASE+'/api/site/ia/'+encodeURIComponent(saved.session)+'/retomar',{headers:{'X-Zac-Token':saved.token},cache:'no-store'});const j=await r.json();if(!r.ok||!j.ok){if(r.status===404||r.status===410)aiForget();throw Error(j.detail||'Não consegui retomar agora.');}
+     resetLead();Object.assign(lead,{nome:j.nome,telefone:j.telefone,produto:j.produto,iaSession:saved.session,iaToken:saved.token});
+     if(saved.sim)Object.assign(lead,{simParcela:saved.sim.parcela,simPrazo:saved.sim.prazo,simValor:saved.sim.valor,simCoeficiente:saved.sim.coef});
+     msgs.innerHTML='';(j.messages||[]).forEach(m=>m.role==='user'?user(m.content):bot(m.content));
+     if(j.documentos?.length)bot('Documentos já recebidos: '+j.documentos.join(', '));
+     if(j.atendimento){lead.atendimentoId=j.atendimento.id;lead.chatToken=j.atendimento.token;startLive();}
+     else{step='ai';bar.classList.remove('zac-hidden');input.placeholder='Continue sua resposta...';aiTools();bot('Pode continuar de onde parou.');}
+   }catch(e){bot(e.message||'Não consegui retomar agora.');options(['Tentar retomar','Começar outra conversa'],x=>{if(x==='Tentar retomar')aiResume();else{aiForget();resetLead();start();}});}
+ }
+
+ // Zac IA: optional pre-qualification; human chat remains unchanged.
+ let iaAvailable=false,iaBusy=false,iaRequest=null;
+ fetch(API_BASE+'/api/site/ia/status',{cache:'no-store'}).then(r=>r.json()).then(j=>{iaAvailable=j.enabled===true}).catch(()=>{});
+ function aiTools(){
+   document.getElementById('zacAiTools')?.remove();
+   const tools=document.createElement('div');tools.id='zacAiTools';tools.className='zac-options';
+   const upload=document.createElement('button');upload.type='button';upload.className='zac-option';upload.textContent='📎 Enviar extrato';
+   const file=document.createElement('input');file.type='file';file.accept='.pdf,.jpg,.jpeg,.png';file.hidden=true;
+   upload.onclick=()=>{if(!iaBusy)file.click();};
+   file.onchange=async()=>{const f=file.files[0];if(!f)return;if(f.size>5*1024*1024){bot('Envie um arquivo de até 5 MB.');return;}
+     iaBusy=true;upload.disabled=true;const sid=lead.iaSession;
+     try{const r=await fetch(API_BASE+'/api/site/ia/'+encodeURIComponent(sid)+'/documento?nome='+encodeURIComponent(f.name),{method:'POST',headers:{'Content-Type':'application/octet-stream','X-Zac-Token':lead.iaToken},body:f});const j=await r.json();if(!r.ok)throw Error(j.detail||'Não consegui receber o arquivo.');if(lead.iaSession===sid)bot('Documento recebido: '+j.nome+'. A equipe fará a análise.');}
+     catch(e){bot(e.message||'Não consegui receber o arquivo.');}finally{iaBusy=false;upload.disabled=false;file.value='';}
+   };
+   const human=document.createElement('button');human.type='button';human.className='zac-option';human.textContent='Falar com atendente';human.onclick=()=>{if(iaBusy){bot('Só um instante, estou concluindo sua solicitação.');return;}aiHandoff();};
+   const later=document.createElement('button');later.type='button';later.className='zac-option';later.textContent='Continuar depois';later.onclick=()=>{if(aiSave()){bot('Conversa salva por até 7 dias. Volte neste mesmo navegador para continuar.');box.classList.remove('open');launch.classList.remove('zac-hidden');}else bot('Não consegui salvar neste navegador. Continue por aqui ou fale com um atendente.');};tools.append(upload,human,later,file);msgs.append(tools);scroll();
+ }
+ function aiHandoff(){document.getElementById('zacAiTools')?.remove();step='handoff';return finish();}
+ async function aiBegin(){
+   iaBusy=true;step='ai_wait';
+   try{const r=await fetch(API_BASE+'/api/site/ia/iniciar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome:lead.nome,telefone:lead.telefone,produto:lead.produto})});const j=await r.json();if(!r.ok||!j.ok)throw Error();lead.iaSession=j.session;lead.iaToken=j.token;aiSave();step='ai';bot('Sou o Zac, assistente virtual. Você pode pedir um atendente a qualquer momento.');bot(j.reply);bar.classList.remove('zac-hidden');input.placeholder='Digite sua resposta...';aiTools();input.focus();}
+   catch(e){iaAvailable=false;afterPhone();}finally{iaBusy=false;}
+ }
+ async function aiSend(v){
+   if(iaBusy||!lead.iaSession)return;
+   iaBusy=true;send.disabled=true;const sid=lead.iaSession;
+   if(!iaRequest||iaRequest.text!==v){iaRequest={id:crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2),text:v};user(v);}
+   try{const r=await fetch(API_BASE+'/api/site/ia/'+encodeURIComponent(sid)+'/mensagem',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:lead.iaToken,mensagem:v,request_id:iaRequest.id})});const j=await r.json();if(!r.ok||!j.ok)throw Error(j.detail||'Não consegui responder agora.');if(lead.iaSession!==sid)return;iaRequest=null;bot(j.reply);if(j.handoff){iaBusy=false;await aiHandoff();}else aiTools();}
+   catch(e){bot(e.message||'Não consegui responder agora. Você pode falar com um atendente.');input.value=v;}
+   finally{iaBusy=false;send.disabled=false;}
+ }
+
+ function afterPhone(){if(iaAvailable&&lead.produto!=='Falar com atendente'){aiBegin();return;}bar.classList.add('zac-hidden');
    if(lead.vemSimulador) return finish();
    if(lead.produto==='INSS Novo') return inssStart();
    if(lead.produto==='Refinanciamento') return refinStart();
@@ -419,7 +470,7 @@ window.zacHorario = {
        else if(m.tipo==='sistema' && m.id>0) liveMsg(m.mensagem,'Sistema');
      });
      if(data.status==='Finalizado'&&!liveFinalizado){
-       liveFinalizado=true;stopLive();bar.classList.add('zac-hidden');
+       liveFinalizado=true;if(lead.iaSession)aiForget();stopLive();bar.classList.add('zac-hidden');
        bot('Atendimento finalizado. Obrigado por falar com a Total Consignados. 💛');
        if(!data.avaliacao_estrelas) mostrarAvaliacao();
        else bot('Sua avaliação de '+data.avaliacao_estrelas+' estrela'+(data.avaliacao_estrelas>1?'s':'')+' foi registrada. Obrigado! ⭐');
@@ -457,7 +508,7 @@ window.zacHorario = {
    if(lead.tipoBeneficio)r.push(['Benefício',lead.tipoBeneficio]); if(lead.beneficio)r.push(['Nº do benefício',lead.beneficio]); if(lead.valorBeneficio)r.push(['Valor aproximado do benefício',lead.valorBeneficio]); if(lead.temEmprestimos)r.push(['Já possui consignados',lead.temEmprestimos]); if(lead.margem)r.push(['Sabe se possui margem',lead.margem]);
    if(lead.banco)r.push(['Banco atual',lead.banco]); if(lead.valorParcela)r.push(['Parcela aproximada',lead.valorParcela]); if(lead.qtdContratos)r.push(['Quantidade de contratos',lead.qtdContratos]); if(lead.parcelasRestantes)r.push(['Parcelas restantes',lead.parcelasRestantes]); if(lead.objetivo)r.push(['Objetivo',lead.objetivo]);
    if(lead.registrado)r.push(['Carteira assinada atualmente',lead.registrado]); if(lead.tempoEmprego)r.push(['Tempo no emprego atual',lead.tempoEmprego]); if(lead.tipoEmpresa)r.push(['Empresa',lead.tipoEmpresa]); if(lead.temClt)r.push(['Já possui consignado CLT',lead.temClt]); if(lead.acessoFgts)r.push(['Acesso ao app FGTS',lead.acessoFgts]); return r.map(([k,v])=>[k,resumoValor(v)]); }
- async function finish(){if(bloquearForaDoHorario())return;bar.classList.add('zac-hidden');bot('Pré-atendimento concluído ✅');const rows=summaryRows();const d=document.createElement('div');d.className='zac-summary';d.innerHTML='<strong>Resumo</strong><br>'+rows.map(([k,v])=>esc(k)+': '+esc(v)).join('<br>')+'<br><br><strong>Esta pré-análise não garante aprovação ou liberação de crédito.</strong>';msgs.appendChild(d);scroll();bot('Só um instante. Estou encaminhando você para nossa equipe...');try{const resp=await fetch(API_BASE+'/api/site/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome:lead.nome||'',telefone:lead.telefone||'',email:'',produto:lead.produto||'Atendimento',mensagem:'Chat do Zac | '+rows.map(([k,v])=>k+': '+v).join(' | '),origem:'Chat do Zac',sim_parcela:lead.simParcela||null,sim_prazo:lead.simPrazo||null,sim_valor:lead.simValor||null,sim_coeficiente:lead.simCoeficiente||null})});const data=await resp.json();if(!resp.ok||!data.ok)throw new Error(data.erro||'Falha ao encaminhar');window.dispatchEvent(new Event('tc:lead-sent'));lead.atendimentoId=data.id;lead.chatToken=data.token;const h=document.createElement('div');h.className='zac-human';if(data.responsavel){h.textContent='Pronto, '+lead.nome+'! Seu atendimento foi encaminhado para '+data.responsavel+'. Continue por aqui que a equipe poderá responder pelo sistema.';}else if(data.fila_posicao){h.textContent='Pronto, '+lead.nome+'! Você entrou na fila de atendimento na posição '+data.fila_posicao+'. Continue por aqui.';}else{h.textContent='Pronto, '+lead.nome+'! Seu atendimento foi encaminhado para a equipe da Total Consignados.';}msgs.appendChild(h);scroll();startLive();}catch(e){const h=document.createElement('div');h.className='zac-human';h.textContent='Não consegui encaminhar automaticamente agora. Você pode falar com nossa equipe pelo WhatsApp abaixo.';msgs.appendChild(h);const w=document.createElement('div');w.className='zac-options';const b=document.createElement('button');b.type='button';b.className='zac-option';b.textContent='Abrir WhatsApp';b.onclick=()=>{document.getElementById('consultorBtn').click()};w.appendChild(b);msgs.appendChild(w);options(['Tentar novo atendimento'],start);scroll();}}
+ async function finish(){if(bloquearForaDoHorario())return;bar.classList.add('zac-hidden');bot('Pré-atendimento concluído ✅');const rows=summaryRows();const d=document.createElement('div');d.className='zac-summary';d.innerHTML='<strong>Resumo</strong><br>'+rows.map(([k,v])=>esc(k)+': '+esc(v)).join('<br>')+'<br><br><strong>Esta pré-análise não garante aprovação ou liberação de crédito.</strong>';msgs.appendChild(d);scroll();bot('Só um instante. Estou encaminhando você para nossa equipe...');try{const resp=await fetch(API_BASE+'/api/site/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome:lead.nome||'',telefone:lead.telefone||'',email:'',produto:lead.produto||'Atendimento',mensagem:'Chat do Zac | '+rows.map(([k,v])=>k+': '+v).join(' | '),origem:'Chat do Zac',ia_session:lead.iaSession||null,ia_token:lead.iaToken||null,sim_parcela:lead.simParcela||null,sim_prazo:lead.simPrazo||null,sim_valor:lead.simValor||null,sim_coeficiente:lead.simCoeficiente||null})});const data=await resp.json();if(!resp.ok||!data.ok)throw new Error(data.erro||'Falha ao encaminhar');window.dispatchEvent(new Event('tc:lead-sent'));lead.atendimentoId=data.id;lead.chatToken=data.token;const h=document.createElement('div');h.className='zac-human';if(data.responsavel){h.textContent='Pronto, '+lead.nome+'! Seu atendimento foi encaminhado para '+data.responsavel+'. Continue por aqui que a equipe poderá responder pelo sistema.';}else if(data.fila_posicao){h.textContent='Pronto, '+lead.nome+'! Você entrou na fila de atendimento na posição '+data.fila_posicao+'. Continue por aqui.';}else{h.textContent='Pronto, '+lead.nome+'! Seu atendimento foi encaminhado para a equipe da Total Consignados.';}msgs.appendChild(h);scroll();startLive();}catch(e){const h=document.createElement('div');h.className='zac-human';h.textContent='Não consegui encaminhar automaticamente agora. Você pode falar com nossa equipe pelo WhatsApp abaixo.';msgs.appendChild(h);const w=document.createElement('div');w.className='zac-options';const b=document.createElement('button');b.type='button';b.className='zac-option';b.textContent='Abrir WhatsApp';b.onclick=()=>{document.getElementById('consultorBtn').click()};w.appendChild(b);msgs.appendChild(w);options(['Tentar novo atendimento'],start);scroll();}}
  function submit(){if(bloquearForaDoHorario())return;let v=input.value.trim();if(!v)return;input.value='';
    if(step==='live'){sendLive(v);return}
    if(step==='phone' && v.replace(/\D/g,'').length<10){bot('Digite um número com DDD para eu conseguir direcionar seu atendimento.');return}
